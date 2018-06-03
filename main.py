@@ -2,21 +2,19 @@
 # -*- coding: utf-8 -*-
 from chatterbot.trainers import ListTrainer
 from chatterbot import ChatBot
-from pocketsphinx import pocketsphinx, Jsgf, FsgModel
+from pocketsphinx import Pocketsphinx, Jsgf, FsgModel
 import speech_recognition as sr
 import os
 import pyttsx3
 import traceback
 
 #CRIANDO UM DECODIFICADOR DE OBJETO
-
-config = pocketsphinx.Decoder.default_config()
+config = Pocketsphinx.Decoder.default_config()
 config.set_string("-hmm", 'model')
 config.set_string("-lm", 'model.lm.bin')
 config.set_string("-dict", 'model.dic')
 config.set_string("-logfn", os.devnull)
-decoder = pocketsphinx.Decoder(config)
-#print('Tudo Certo até aqui :)')
+decoder = Pocketsphinx.Decoder(config)
 
 def recognize_pt(audio):
     raw_data = audio.get_raw_data(convert_rate=16000, convert_width=2)
